@@ -9,5 +9,5 @@ public class Test {
 
 }
 class MyClass{
-    static int x = 10 ;
+    static final int x = 10 ;
 }
