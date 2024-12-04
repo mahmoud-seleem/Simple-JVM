@@ -1,8 +1,10 @@
 package com.example;
 
 import org.apache.bcel.classfile.*;
+
+import com.example.classLoader.JavaClassParser;
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        JavaClassParser.parse("target\\classes\\com\\example\\demos\\Test.class");
     }
 }
