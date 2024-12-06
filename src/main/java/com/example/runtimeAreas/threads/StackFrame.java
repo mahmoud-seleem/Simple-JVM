@@ -1,6 +1,5 @@
 package com.example.runtimeAreas.threads;
 
-import java.util.ArrayList;
 import java.util.Stack;
 
 public class StackFrame { 
@@ -25,5 +24,13 @@ public class StackFrame {
 
     public Object getLocalAt(int index){
         return this.localVars[index];
+    }
+
+    public void setFrameDateAt(Object object , int index){
+        this.frameData[index] = object;
+    }
+
+    public Object getFrameDataAt(int index){
+        return frameData[index];
     }
 }
