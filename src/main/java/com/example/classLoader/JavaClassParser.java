@@ -14,6 +14,9 @@ public class JavaClassParser {
             parserMethodArea.addClass(
                 javaClass.getClassName(),
                  new JavaClassInfo(javaClass,this));
+            // while(true){
+            //     JavaClass superClass = javaClass.getSuperClass();
+            // }
         }catch(Exception e){
             System.out.println(e);
         }finally{
