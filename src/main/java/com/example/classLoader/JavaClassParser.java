@@ -16,8 +16,6 @@ public class JavaClassParser {
             parserMethodArea.addClass(
                 javaClass.getClassName(),
                 new JavaClassInfo(javaClass,this));
-                // ConstantPoolGen cp = new ConstantPoolGen(javaClass.getConstantPool());
-                // MethodGen methodGen = new MethodGen(javaClass.getMethods()[0], javaClass.getClassName(), cp);
             }
             catch(Exception e){
             System.out.println(e);
