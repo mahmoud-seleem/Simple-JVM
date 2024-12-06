@@ -8,7 +8,7 @@ public class StackFrame {
     private final Stack<Object> operandStack = new Stack<>();
     private final Object[] frameData = new Object[3];
 
-    public StackFrame(int localSize,int frameDataSize){
+    public StackFrame(int localSize){
         this.localVars = new Object[localSize];
     }
 
