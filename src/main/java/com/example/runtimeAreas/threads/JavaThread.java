@@ -14,4 +14,7 @@ public class JavaThread {
     public StackFrame removeStackFrame(){
         return stack.pop();
     }
+    public StackFrame getCurrentFrame(){
+        return stack.peek();
+    }
 }

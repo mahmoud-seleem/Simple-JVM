@@ -33,4 +33,10 @@ public class StackFrame {
     public Object getFrameDataAt(int index){
         return frameData[index];
     }
+    public Object[] getLocals(){
+        return localVars;
+    }
+    public Stack<Object> getOperandStack(){
+        return operandStack;
+    }
 }

@@ -2,6 +2,8 @@ package com.example;
 
 import java.util.Scanner;
 
+import org.apache.bcel.classfile.LocalVariable;
+import org.apache.bcel.classfile.LocalVariableTable;
 import org.apache.bcel.classfile.Method;
 
 import com.example.classLoader.JavaClassInfo;
@@ -9,6 +11,8 @@ import com.example.classLoader.JavaClassLoader;
 import com.example.classLoader.JavaClassParser;
 import com.example.execution.Executer;
 import com.example.execution.ExecutionEngine;
+import com.example.runtimeAreas.threads.JavaThread;
+import com.example.runtimeAreas.threads.StackFrame;
 public class Main {
     public static final Scanner input = new Scanner(System.in);
     public static void main(String[] args) throws Exception{
@@ -22,7 +26,9 @@ public class Main {
         JavaClassLoader loader = new JavaClassLoader(basePath);
         JavaClassInfo classInfo = loader.loadClass(className);
         Method main = Executer.findMainMethod(classInfo);
-        ExecutionEngine.executeMethod(main);
+        JavaThread mainThread = new JavaThread();
+        ExecutionEngine.callMethod(mainThread, main,new Object[0]);
+        ExecutionEngine.executeMethod(mainThread,main);
         // System.out.println(className);
         // Method[] methods = classInfo.getParsedClass().getMethods();
         // for (Method m : methods){
@@ -31,9 +37,5 @@ public class Main {
         
     }
 
-    public static void printArray(Object[] a){
-        for (Object o : a){
-            System.out.println(o);
-        }
-    }
+    
 }

@@ -6,7 +6,7 @@ import com.example.classLoader.JavaClassInfo;
 
 public class Executer {
     
-    public static Method findMainMethod(JavaClassInfo classInfo) throws NoSuchMethodException{
+    public static Method findMainMethod(JavaClassInfo classInfo) throws NoSuchMethodException,ClassNotFoundException{
         if (classInfo != null ){
             Method[] classMethods = classInfo.getParsedClass().getMethods();
             Method mainMehtod = null; 
@@ -16,7 +16,8 @@ public class Executer {
                     return mainMehtod;
                 }
             }
-            throw new NoSuchMethodException("can't find main method");
-            
+            throw new NoSuchMethodException("can't find main method");        
         }
+        throw new ClassNotFoundException("can't find class ");
+}
 }
