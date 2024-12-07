@@ -4,12 +4,12 @@ import org.apache.bcel.classfile.JavaClass;
 
 public class JavaClassInfo  {
     private JavaClass parsedClass;
-    private JavaClassParser classLoader;
+    private JavaClassLoader classLoader;
 
     public JavaClassInfo(){
 
     }
-    public JavaClassInfo(JavaClass javaClass, JavaClassParser classLoader){
+    public JavaClassInfo(JavaClass javaClass, JavaClassLoader classLoader){
         this.parsedClass = javaClass;
         this.classLoader = classLoader;
     }
@@ -19,10 +19,10 @@ public class JavaClassInfo  {
     public void setParsedClass(JavaClass parsedClass) {
         this.parsedClass = parsedClass;
     }
-    public JavaClassParser getClassLoader() {
+    public JavaClassLoader getClassLoader() {
         return classLoader;
     }
-    public void setClassLoader(JavaClassParser classLoader) {
+    public void setClassLoader(JavaClassLoader classLoader) {
         this.classLoader = classLoader;
     }
         

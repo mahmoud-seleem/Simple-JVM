@@ -7,24 +7,18 @@ import org.apache.bcel.generic.MethodGen;
 import com.example.runtimeAreas.methodAreas.ClassLoaderMethodArea;
 
 public class JavaClassParser {
-    private final ClassLoaderMethodArea parserMethodArea = new ClassLoaderMethodArea();
-    public boolean parse(String classPath){
+    public static JavaClass parse(String classPath) {
         ClassParser parser;
-        try{
+        JavaClass javaClass = null;
+        try {
             parser = new ClassParser(classPath);
-            JavaClass javaClass = parser.parse();
-            parserMethodArea.addClass(
-                javaClass.getClassName(),
-                new JavaClassInfo(javaClass,this));
-            }
-            catch(Exception e){
+            javaClass = parser.parse();
+            return javaClass;
+        } catch (Exception e) {
             System.out.println(e);
-        }finally{
+        } finally {
             parser = null;
         }
-        return true;
-    }
-    public ClassLoaderMethodArea getMethodArea(){
-        return this.parserMethodArea;
+        return javaClass;
     }
 }
