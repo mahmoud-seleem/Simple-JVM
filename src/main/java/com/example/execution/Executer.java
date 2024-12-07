@@ -8,12 +8,13 @@ public class Executer {
     
     public static Method findMainMethod(JavaClassInfo classInfo){
         Method[] classMethods = classInfo.getParsedClass().getMethods();
+        Method mainMehtod = null; 
         for (Method method : classMethods){
             if (method.getName().equals("main")) {
-                return method;
-            }else {
-                return method;
+                mainMehtod = method;
+                return mainMehtod;
             }
         }
+        return mainMehtod;
     }
 }

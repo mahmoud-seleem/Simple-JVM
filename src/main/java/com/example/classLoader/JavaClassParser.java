@@ -24,4 +24,7 @@ public class JavaClassParser {
         }
         return true;
     }
+    public ClassLoaderMethodArea getMethodArea(){
+        return this.parserMethodArea;
+    }
 }
