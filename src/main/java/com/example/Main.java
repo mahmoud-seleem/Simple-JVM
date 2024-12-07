@@ -11,26 +11,24 @@ import com.example.execution.Executer;
 import com.example.execution.ExecutionEngine;
 public class Main {
     public static final Scanner input = new Scanner(System.in);
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         System.out.println("Starting our SIMPLE JVM :) ");
-        System.out.println("___________________________");
+        System.out.println("---------------------------");
         System.out.println("please enter the directory Path the press Enter.");
         String basePath = input.nextLine();
         System.out.println("Please enter the class name to start execution.");
         String className = input.nextLine();
+        System.out.println("-------------------------------");
         JavaClassLoader loader = new JavaClassLoader(basePath);
-        loader.loadClass(className);
-        Object[] names = loader
-        .getMethodArea()
-        .getAllClassesNames();
-        printArray(names);
-         // System.out.println(className);
+        JavaClassInfo classInfo = loader.loadClass(className);
+        Method main = Executer.findMainMethod(classInfo);
+        ExecutionEngine.executeMethod(main);
+        // System.out.println(className);
         // Method[] methods = classInfo.getParsedClass().getMethods();
         // for (Method m : methods){
         //     System.out.println(m.getName());
         // }
-        // Method main = Executer.findMainMethod(classInfo);
-        // ExecutionEngine.executeMethod(main);
+        
     }
 
     public static void printArray(Object[] a){

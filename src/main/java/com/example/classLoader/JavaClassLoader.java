@@ -24,10 +24,13 @@ public class JavaClassLoader {
                 .append(".class")
                 .toString();
         JavaClass javaClass = JavaClassParser.parse(classPath);
-        JavaClassInfo classInfo = new JavaClassInfo(javaClass, this);
-        loaderMethodArea.addClass(
-                javaClass.getClassName(),
-                classInfo);
+        JavaClassInfo classInfo = null;
+        if (javaClass != null){
+            classInfo = new JavaClassInfo(javaClass, this);
+            loaderMethodArea.addClass(
+                    javaClass.getClassName(),
+                    classInfo);
+        }
         return classInfo;
     }
 
