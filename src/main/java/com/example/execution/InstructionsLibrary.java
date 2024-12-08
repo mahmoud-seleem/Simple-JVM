@@ -101,4 +101,45 @@ public class InstructionsLibrary {
             return;
         }throw new ArithmeticException("not appropriate operands");        
     }
+    public static void isub(StackFrame frame){
+        Object top = frame.pop();
+        Object sec = frame.pop();
+        if (top instanceof Integer && sec instanceof Integer){
+            frame.push((int)sec - (int)top);
+            return;
+        }throw new ArithmeticException("not appropriate operands");        
+    }
+
+    public static void imul(StackFrame frame){
+        Object top = frame.pop();
+        Object sec = frame.pop();
+        if (top instanceof Integer && sec instanceof Integer){
+            frame.push((int)sec * (int)top);
+            return;
+        }throw new ArithmeticException("not appropriate operands");        
+    }
+    public static void idiv(StackFrame frame){
+        Object top = frame.pop();
+        Object sec = frame.pop();
+        if (top instanceof Integer && sec instanceof Integer){
+            frame.push((int)sec / (int)top);
+            return;
+        }throw new ArithmeticException("not appropriate operands");        
+    }
+    public static void irem(StackFrame frame){
+        Object top = frame.pop();
+        Object sec = frame.pop();
+        if (top instanceof Integer && sec instanceof Integer){
+            frame.push((int)sec % (int)top);
+            return;
+        }throw new ArithmeticException("not appropriate operands");        
+    }
+    public static void ineg(StackFrame frame){
+        Object top = frame.pop();
+        if (top instanceof Integer){
+            frame.push(-1* (int)top);
+            return;
+        }throw new ArithmeticException("not appropriate operands");
+        
+    }
 }

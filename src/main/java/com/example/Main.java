@@ -5,6 +5,8 @@ import java.util.Scanner;
 import org.apache.bcel.classfile.LocalVariable;
 import org.apache.bcel.classfile.LocalVariableTable;
 import org.apache.bcel.classfile.Method;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.classLoader.JavaClassInfo;
 import com.example.classLoader.JavaClassLoader;
@@ -13,9 +15,11 @@ import com.example.execution.Executer;
 import com.example.execution.ExecutionEngine;
 import com.example.runtimeAreas.threads.JavaThread;
 import com.example.runtimeAreas.threads.StackFrame;
+@SpringBootApplication
 public class Main {
     public static final Scanner input = new Scanner(System.in);
     public static void main(String[] args) throws Exception{
+        SpringApplication.run(Main.class, args);
         System.out.println("Starting our SIMPLE JVM :) ");
         System.out.println("---------------------------");
         System.out.println("please enter the directory Path the press Enter.");

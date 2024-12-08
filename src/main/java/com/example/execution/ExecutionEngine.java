@@ -75,8 +75,32 @@ public class ExecutionEngine {
                 case 88:
                     pop2(currentFrame);
                     break;
+                case 89:
+                    dup(currentFrame);
+                    break;
+                case 92:
+                    dup2(currentFrame);
+                    break;
+                case 95:
+                    swap(currentFrame);
+                    break;
                 case 96:
                     iadd(currentFrame);
+                    break;
+                case 100:
+                    isub(currentFrame);
+                    break;
+                case 104:
+                    imul(currentFrame);
+                    break;
+                case 108:
+                    idiv(currentFrame);
+                    break;
+                case 112:
+                    irem(currentFrame);
+                    break;
+                case 116:
+                    ineg(currentFrame);
                     break;
                 default:
                     break;
