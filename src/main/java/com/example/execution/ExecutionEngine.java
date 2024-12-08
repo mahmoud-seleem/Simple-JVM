@@ -69,6 +69,15 @@ public class ExecutionEngine {
                 case 62:
                     istore_3(currentFrame);
                     break;
+                case 87:
+                    pop(currentFrame);
+                    break;
+                case 88:
+                    pop2(currentFrame);
+                    break;
+                case 96:
+                    iadd(currentFrame);
+                    break;
                 default:
                     break;
             }

@@ -69,6 +69,36 @@ public class InstructionsLibrary {
     public static void istore_3(StackFrame frame){
         frame.setLocalAt(frame.pop(),3);
     } 
+    public static void pop(StackFrame frame){
+        frame.pop();
+    } 
+    public static void pop2(StackFrame frame){
+        frame.pop();
+        frame.pop();
+    }
+    public static void dup(StackFrame frame){
+        frame.push(frame.peek());
+    } 
+    public static void dup2(StackFrame frame){
+        Object o1 = frame.pop();
+        Object o2 = frame.peek();
+        frame.push(o1);
+        frame.push(o2);
+        frame.push(o1);    
+    }     
+    public static void swap(StackFrame frame){
+        Object top = frame.pop();
+        Object sec = frame.pop();
+        frame.push(top);
+        frame.push(sec);
+    }
 
-
+    public static void iadd(StackFrame frame){
+        Object top = frame.pop();
+        Object sec = frame.pop();
+        if (top instanceof Integer && sec instanceof Integer){
+            frame.push((int)top + (int)sec);
+            return;
+        }throw new ArithmeticException("not appropriate operands");        
+    }
 }

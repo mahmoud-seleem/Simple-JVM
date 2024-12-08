@@ -39,4 +39,7 @@ public class StackFrame {
     public Stack<Object> getOperandStack(){
         return operandStack;
     }
+    public Object peek(){
+        return operandStack.peek();
+    }
 }
