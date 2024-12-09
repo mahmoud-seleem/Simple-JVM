@@ -119,11 +119,11 @@ public class ExecutionEngine {
 
         // passing args to it.
         if (method.getName().equals("main")) {
-            passArgs(args, currentFrame.getLocals(), true);
+            passArgs(args, currentFrame.getLocalVars(), true);
         } else {
             // code for any static method passing args
         }
-        Printing.printArray(currentFrame.getLocals());
+        Printing.printArray(currentFrame.getLocalVars());
     }
 
     private static void passArgs(Object[] callerArgs, Object[] calledLocals, boolean isStatic) {

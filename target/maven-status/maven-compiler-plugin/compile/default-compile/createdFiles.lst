@@ -1,3 +1,4 @@
+com\example\webSocket\OutputMessage.class
 com\example\execution\Executer.class
 com\example\execution\InstructionsLibrary.class
 com\example\demos\Test.class
@@ -5,8 +6,10 @@ com\example\Main.class
 com\example\classLoader\JavaClassParser.class
 com\example\utils\Printing.class
 com\example\runtimeAreas\threads\JavaThread.class
+com\example\webSocket\FrameController.class
+com\example\webSocket\Message.class
 com\example\execution\ExecutionEngine.class
-com\example\controllers\FrameController.class
+com\example\WebSocketConfig.class
 com\example\classLoader\JavaClassLoader.class
 com\example\runtimeAreas\threads\StackFrame.class
 com\example\classLoader\JavaClassInfo.class

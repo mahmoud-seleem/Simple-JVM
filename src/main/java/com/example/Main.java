@@ -20,24 +20,24 @@ public class Main {
     public static final Scanner input = new Scanner(System.in);
     public static void main(String[] args) throws Exception{
         SpringApplication.run(Main.class, args);
-        System.out.println("Starting our SIMPLE JVM :) ");
-        System.out.println("---------------------------");
-        System.out.println("please enter the directory Path the press Enter.");
-        String basePath = input.nextLine();
-        System.out.println("Please enter the class name to start execution.");
-        String className = input.nextLine();
-        System.out.println("-------------------------------");
-        JavaClassLoader loader = new JavaClassLoader(basePath);
-        JavaClassInfo classInfo = loader.loadClass(className);
-        Method main = Executer.findMainMethod(classInfo);
-        JavaThread mainThread = new JavaThread();
-        ExecutionEngine.callMethod(mainThread, main,new Object[0]);
-        ExecutionEngine.executeMethod(mainThread,main);
-        // System.out.println(className);
-        // Method[] methods = classInfo.getParsedClass().getMethods();
-        // for (Method m : methods){
-        //     System.out.println(m.getName());
-        // }
+        // System.out.println("Starting our SIMPLE JVM :) ");
+        // System.out.println("---------------------------");
+        // System.out.println("please enter the directory Path the press Enter.");
+        // String basePath = input.nextLine();
+        // System.out.println("Please enter the class name to start execution.");
+        // String className = input.nextLine();
+        // System.out.println("-------------------------------");
+        // JavaClassLoader loader = new JavaClassLoader(basePath);
+        // JavaClassInfo classInfo = loader.loadClass(className);
+        // Method main = Executer.findMainMethod(classInfo);
+        // JavaThread mainThread = new JavaThread();
+        // ExecutionEngine.callMethod(mainThread, main,new Object[0]);
+        // ExecutionEngine.executeMethod(mainThread,main);
+        // // System.out.println(className);
+        // // Method[] methods = classInfo.getParsedClass().getMethods();
+        // // for (Method m : methods){
+        // //     System.out.println(m.getName());
+        // // }
         
     }
 
