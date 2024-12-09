@@ -12,7 +12,7 @@ public class ExecutionEngine {
         byte[] byteCode = method.getCode().getCode();
         StackFrame currentFrame = thread.getCurrentFrame();
         for (int i = 0; i < byteCode.length; i++) {
-            switch (byteCode[i]) {
+            switch ((int) byteCode[i]) {
                 case 1:
                     // code for pushing null into the stack.
                     break;
@@ -36,6 +36,16 @@ public class ExecutionEngine {
                     break;
                 case 8:
                     iconst_5(currentFrame);
+                    break;
+                case 16:
+                    bipush(byteCode[i + 1], currentFrame);
+                    i++;
+                    break;
+                case 17:
+                    int one = byteCode[i + 1];
+                    one = one << 8;
+                    sipush((short)(one + byteCode[i+2]), currentFrame);
+                    i= i + 2;
                     break;
                 case 21:
                     iload(byteCode[i + 1], currentFrame);
@@ -101,6 +111,24 @@ public class ExecutionEngine {
                     break;
                 case 116:
                     ineg(currentFrame);
+                    break;
+                case 159:
+                    if (if_icmpeq(currentFrame)) {
+                        int one1 = byteCode[i + 1];
+                        one1 = one1 << 8;
+                        i = (one1 + byteCode[i + 2]) - 1;
+                    } else {
+                        i = i + 3;
+                    }
+
+                    break;
+                case 167:
+                    int one = byteCode[i + 1];
+                    one = one << 8;
+                    i = (one + byteCode[i + 2]) - 1;
+                    break;
+                case 177:
+                    // code for return
                     break;
                 default:
                     break;
