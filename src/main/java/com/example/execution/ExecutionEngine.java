@@ -7,6 +7,16 @@ import com.example.runtimeAreas.threads.StackFrame;
 import com.example.utils.Printing;
 import static com.example.execution.InstructionsLibrary.*;
 
+
+/*
+ *  there is two proposed implementation 
+ * one is to use one execution loop per thread and use the 
+ * frame data to call and return from methods.
+ * two is to use one execution loop per method and use the excecution loop 
+ * itself to transform return and call info rather than the frame data.
+ * 
+ * for now i will stick with the second implementation.  
+*/
 public class ExecutionEngine {
     public static void executeMethod(JavaThread thread, Method method) {
         byte[] byteCode = method.getCode().getCode();
@@ -42,10 +52,8 @@ public class ExecutionEngine {
                     i++;
                     break;
                 case 17:
-                    int one = byteCode[i + 1];
-                    one = one << 8;
-                    sipush((short)(one + byteCode[i+2]), currentFrame);
-                    i= i + 2;
+                    sipush(getTheNextShortValue(byteCode, i), currentFrame);
+                    i = i + 2;
                     break;
                 case 21:
                     iload(byteCode[i + 1], currentFrame);
@@ -114,18 +122,13 @@ public class ExecutionEngine {
                     break;
                 case 159:
                     if (if_icmpeq(currentFrame)) {
-                        int one1 = byteCode[i + 1];
-                        one1 = one1 << 8;
-                        i = (one1 + byteCode[i + 2]) - 1;
+                        i = jumpTo(byteCode, i); 
                     } else {
-                        i = i + 3;
+                        i = i + 2;
                     }
-
                     break;
-                case 167:
-                    int one = byteCode[i + 1];
-                    one = one << 8;
-                    i = (one + byteCode[i + 2]) - 1;
+                case 167: // goto
+                    i = jumpTo(byteCode, i);
                     break;
                 case 177:
                     // code for return
@@ -164,5 +167,18 @@ public class ExecutionEngine {
         for (Object object : callerArgs) {
             calledLocals[index] = object;
         }
+    }
+
+    // jump to index that is a signed short value that come after the byte code of i  
+    private static int jumpTo(byte[] byteCode, int i) { // i is the current index.
+        int one = byteCode[i + 1];
+        one = one << 8;
+        return (one + byteCode[i + 2]) - 1;
+    }
+
+    private static short getTheNextShortValue(byte[] byteCode, int i) { // i is the current index.
+        int one = byteCode[i + 1];
+        one = one << 8;
+        return (short) (one + byteCode[i+2]); 
     }
 }
