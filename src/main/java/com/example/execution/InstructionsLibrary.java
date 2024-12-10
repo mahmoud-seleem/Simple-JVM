@@ -234,4 +234,52 @@ public class InstructionsLibrary {
     public static void sipush(short shortval , StackFrame frame){
         frame.push(shortval);
     }
+    public static boolean ifeq(StackFrame frame) {
+        int value = (int) frame.pop();      
+        if (value == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean ifne(StackFrame frame) {
+        int value = (int) frame.pop();      
+        if (value != 0) {
+            return true;
+        }
+        return false;
+    }
+    public static boolean iflt(StackFrame frame) {
+        int value = (int) frame.pop();      
+        if (value < 0) {
+            return true;
+        }
+        return false;
+    }
+    public static boolean ifle(StackFrame frame) {
+        int value = (int) frame.pop();      
+        if (value <= 0) {
+            return true;
+        }
+        return false;
+    }
+    public static boolean ifgt(StackFrame frame) {
+        int value = (int) frame.pop();      
+        if (value > 0) {
+            return true;
+        }
+        return false;
+    }
+    public static boolean ifge(StackFrame frame) {
+        int value = (int) frame.pop();      
+        if (value >= 0) {
+            return true;
+        }
+        return false;
+    }
+    public static void iinc(StackFrame frame,int index,byte constant){
+        frame.setLocalAt(
+            (int)frame.getLocalAt(index) + constant // new value = old + constant
+            ,index);
+    }
 }

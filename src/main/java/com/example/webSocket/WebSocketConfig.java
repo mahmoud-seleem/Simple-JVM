@@ -1,5 +1,4 @@
-package com.example;
-
+package com.example.webSocket;
 import org.springframework.boot.autoconfigure.graphql.reactive.GraphQlWebFluxAutoConfiguration.WebSocketConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
