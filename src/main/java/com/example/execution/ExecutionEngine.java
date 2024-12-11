@@ -7,7 +7,6 @@ import com.example.runtimeAreas.threads.StackFrame;
 import com.example.utils.Printing;
 import static com.example.execution.InstructionsLibrary.*;
 
-
 /*
  *  there is two proposed implementation 
  * one is to use one execution loop per thread and use the 
@@ -18,7 +17,7 @@ import static com.example.execution.InstructionsLibrary.*;
  * for now i will stick with the second implementation.  
 */
 public class ExecutionEngine {
-    public static void executeMethod(JavaThread thread, Method method) {
+    public static void executeMethod(JavaThread thread, Method method) throws Exception {
         byte[] byteCode = method.getCode().getCode();
         StackFrame currentFrame = thread.getCurrentFrame();
         for (int i = 0; i < byteCode.length; i++) {
@@ -120,9 +119,63 @@ public class ExecutionEngine {
                 case 116:
                     ineg(currentFrame);
                     break;
+                case 120:
+                    ishl(currentFrame);
+                    break;
+                case 122:
+                    ishr(currentFrame);
+                    break;
+                case 124:
+                    iushr(currentFrame);
+                    break;
+                case 128:
+                    ior(currentFrame);
+                    break;
+                case 130:
+                    ixor(currentFrame);
+                    break;
+                case 132:
+                    iinc(currentFrame, byteCode[i + 1], byteCode[i + 2]);
+                    i = i + 2;
+                    break;
+
                 case 159:
                     if (if_icmpeq(currentFrame)) {
-                        i = jumpTo(byteCode, i); 
+                        i = jumpTo(byteCode, i);
+                    } else {
+                        i = i + 2;
+                    }
+                    break;
+                case 160: // if_icmpne
+                    if (if_icmpne(currentFrame)) {
+                        i = jumpTo(byteCode, i);
+                    } else {
+                        i = i + 2;
+                    }
+                case 161: // if_icmplt
+                    if (if_icmplt(currentFrame)) {
+                        i = jumpTo(byteCode, i);
+                    } else {
+                        i = i + 2;
+                    }
+                    break;
+                case 162: // if_icmpge
+                    if (if_icmpge(currentFrame)) {
+                        i = jumpTo(byteCode, i);
+                    } else {
+                        i = i + 2;
+                    }
+                    break;
+                case 163: // if_icmpgt
+                    if (if_icmpgt(currentFrame)) {
+                        i = jumpTo(byteCode, i);
+                    } else {
+                        i = i + 2;
+                    }
+                    break;
+                case 164: // if_icmple
+                    if (if_icmple(currentFrame)) {
+                        i = jumpTo(byteCode, i);
                     } else {
                         i = i + 2;
                     }
@@ -134,10 +187,10 @@ public class ExecutionEngine {
                     // code for return
                     break;
                 default:
-                    break;
+                    throw new Exception("unsupported operation");
             }
+            Printing.printFrame(currentFrame);
         }
-        Printing.printArray(thread.getCurrentFrame().getOperandStack().toArray());
     }
 
     // method for creating the frame to a new method and pass the args to it.
@@ -169,7 +222,7 @@ public class ExecutionEngine {
         }
     }
 
-    // jump to index that is a signed short value that come after the byte code of i  
+    // jump to index that is a signed short value that come after the byte code of i
     private static int jumpTo(byte[] byteCode, int i) { // i is the current index.
         int one = byteCode[i + 1];
         one = one << 8;
@@ -179,6 +232,6 @@ public class ExecutionEngine {
     private static short getTheNextShortValue(byte[] byteCode, int i) { // i is the current index.
         int one = byteCode[i + 1];
         one = one << 8;
-        return (short) (one + byteCode[i+2]); 
+        return (short) (one + byteCode[i + 2]);
     }
 }

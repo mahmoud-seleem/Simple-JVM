@@ -1,16 +1,12 @@
 package com.example.execution;
-
-import org.apache.bcel.classfile.Method;
-
-import com.example.runtimeAreas.threads.JavaThread;
 import com.example.runtimeAreas.threads.StackFrame;
 
 public class InstructionsLibrary {
     // pushing value to stack
-    public static void interpretByeCode(byte byteCode, JavaThread thread, Method method) {
-        StackFrame currentFrame = thread.getCurrentFrame();
+    // public static void interpretByeCode(byte byteCode, JavaThread thread, Method method) {
+    //     StackFrame currentFrame = thread.getCurrentFrame();
 
-    }
+    // }
 
     public static void iconst_0(StackFrame frame) {
         frame.push((int) 0);
@@ -281,5 +277,65 @@ public class InstructionsLibrary {
         frame.setLocalAt(
             (int)frame.getLocalAt(index) + constant // new value = old + constant
             ,index);
+    }
+    public static void iand(StackFrame frame) {
+        Object top = frame.pop();
+        Object sec = frame.pop();
+    
+        if (top instanceof Integer && sec instanceof Integer) {
+            frame.push((int) top & (int) sec);  // Perform bitwise AND
+            return;
+        }
+        throw new ArithmeticException("Operands must be integers for iand");
+    }
+    public static void ior(StackFrame frame) {
+        Object top = frame.pop();
+        Object sec = frame.pop();
+    
+        if (top instanceof Integer && sec instanceof Integer) {
+            frame.push((int) top | (int) sec);  // Perform bitwise OR
+            return;
+        }
+        throw new ArithmeticException("Operands must be integers for ior");
+    }
+    public static void ixor(StackFrame frame) {
+        Object top = frame.pop();
+        Object sec = frame.pop();
+    
+        if (top instanceof Integer && sec instanceof Integer) {
+            frame.push((int) top ^ (int) sec);  // Perform bitwise XOR
+            return;
+        }
+        throw new ArithmeticException("Operands must be integers for ixor");
+    }
+    public static void ishl(StackFrame frame) {
+        Object shift = frame.pop();  // Number of bits to shift
+        Object value = frame.pop();  // Value to shift
+    
+        if (shift instanceof Integer && value instanceof Integer) {
+            frame.push((int) value << (int) shift);  // Perform left shift
+            return;
+        }
+        throw new ArithmeticException("Operands must be integers for ishl");
+    }
+    public static void ishr(StackFrame frame) {
+        Object shift = frame.pop();  // Number of bits to shift
+        Object value = frame.pop();  // Value to shift
+    
+        if (shift instanceof Integer && value instanceof Integer) {
+            frame.push((int) value >> (int) shift);  // Perform arithmetic right shift
+            return;
+        }
+        throw new ArithmeticException("Operands must be integers for ishr");
+    }
+    public static void iushr(StackFrame frame) {
+        Object shift = frame.pop();  // Number of bits to shift
+        Object value = frame.pop();  // Value to shift
+    
+        if (shift instanceof Integer && value instanceof Integer) {
+            frame.push((int) value >>> (int) shift);  // Perform logical right shift
+            return;
+        }
+        throw new ArithmeticException("Operands must be integers for iushr");
     }
 }
