@@ -1,10 +1,6 @@
 package com.example.classLoader;
 
 import org.apache.bcel.classfile.*;
-import org.apache.bcel.generic.ConstantPoolGen;
-import org.apache.bcel.generic.MethodGen;
-
-import com.example.runtimeAreas.methodAreas.ClassLoaderMethodArea;
 
 public class JavaClassParser {
     public static JavaClass parse(String classPath) {
