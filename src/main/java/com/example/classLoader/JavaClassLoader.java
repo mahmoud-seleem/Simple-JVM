@@ -16,24 +16,22 @@ public class JavaClassLoader {
         this.BASE_PATH = basePath;
     }
 
-    public JavaClassInfo loadClass(String className) throws Exception{
-        // String classPath = new StringBuffer()
-        //         .append(BASE_PATH)
-        //         .append("\\")
-        //         .append(className)
-        //         .append(".class")
-        //         .toString();
-                //classPath = classPath.replace("\\", ".");
-        JavaClass javaClass = JavaClassParser.parse(className);
+    public JavaClassInfo loadClass(String className) {
+        String classPath = new StringBuffer()
+                .append(BASE_PATH)
+                .append("/")
+                .append(className)
+                .append(".class")
+                .toString();
+        JavaClass javaClass = JavaClassParser.parse(classPath);
         JavaClassInfo classInfo = null;
         if (javaClass != null){
             classInfo = new JavaClassInfo(javaClass, this);
             loaderMethodArea.addClass(
                     javaClass.getClassName(),
                     classInfo);
-            return classInfo;
-                }
-        throw new Exception("hi");
+        }
+        return classInfo;
     }
 
     public ClassLoaderMethodArea getMethodArea() {
